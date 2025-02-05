@@ -52,3 +52,16 @@ jobs:
                 PG_PASSWORD: ${{secrets.PG_PASSWORD}}
                 PG_HOST: ${{secrets.PG_HOST}}
                 PG_PORT: ${{secrets.PG_PORT}} 
+     deploy:
+      runs-on: ubintu-latest
+      needs: testing
+      steps:
+        - name: deploy
+          uses: appleboy/ssh-action@master
+          with:
+            host: 194.67.90.9
+            username: root
+            password: ${{secrets.SERVER_PASSWORD}} 
+            script: |
+              pwd
+              ls
